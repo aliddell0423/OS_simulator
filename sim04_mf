@@ -1,0 +1,37 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+sim04 : OS_SimDriver.o StringUtils.o configops.o metadataops.o simulator.o simtimer.o MemoryManagement.o CpuManagement.o DisplayLog.o
+	$(CC) $(LFLAGS) OS_SimDriver.o StringUtils.o configops.o metadataops.o simulator.o simtimer.o MemoryManagement.o CpuManagement.o DisplayLog.o -lpthread -o sim04
+
+OS_SimDriver.o : OS_SimDriver.c configops.h metadataops.h simulator.h StringUtils.h DisplayLog.h
+	$(CC) $(CFLAGS) OS_SimDriver.c
+
+StringUtils.o : StringUtils.c StringUtils.h
+	$(CC) $(CFLAGS) StringUtils.c
+
+configops.o : configops.c configops.h StringUtils.h
+	$(CC) $(CFLAGS) configops.c
+
+metadataops.o : metadataops.c metadataops.h StringUtils.h
+	$(CC) $(CFLAGS) metadataops.c
+   
+simulator.o : simulator.c simulator.h StringUtils.h CpuManagement.h DisplayLog.h
+	$(CC) $(CFLAGS) simulator.c
+
+simtimer.o : simtimer.c simtimer.h StringUtils.h
+	$(CC) $(CFLAGS) simtimer.c
+
+CpuManagement.o : CpuManagement.c CpuManagement.h configops.h metadataops.h simulator.h StringUtils.h DisplayLog.h
+	$(CC) $(CFLAGS) CpuManagement.c
+
+MemoryManagement.o : MemoryManagement.c MemoryManagement.h StringUtils.h
+	$(CC) $(CFLAGS) MemoryManagement.c
+
+DisplayLog.o : DisplayLog.c DisplayLog.h simulator.h StringUtils.h
+	$(CC) $(CFLAGS) DisplayLog.c
+
+clean:
+	\rm *.o sim04
