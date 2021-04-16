@@ -14,5 +14,7 @@ Preemptive scheduling formats are completed with multithreading, and the sim has
 
 make sure that both a config and metadata file are in the same directory, then run:
 
+```
 $ make -f sim04_mf
 $ ./sim04 -rs config0.cnf
+```
