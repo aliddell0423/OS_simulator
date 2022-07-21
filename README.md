@@ -19,3 +19,5 @@ $ make -f sim04_mf
 $ ./sim04 -rs config2.cnf
 ```
 To see the full program format, simply run the binary file
+
+To all students who may have searched this up. DO NOT COPY. You WILL get caught.
